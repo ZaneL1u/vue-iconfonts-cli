@@ -1,0 +1,24 @@
+<template>#iconContent#</template>
+<script>
+import { getIconColor } from "./helper";
+
+export default {
+  name: "#componentName#",
+  props: {
+    size: {
+      type: Number,
+      default: 18,
+    },
+    color: {
+      type: String,
+      default: "",
+    },
+    style: {
+      type: String,
+      default: "display: block;",
+    },
+  },
+};
+</script>
+
+<style></style>

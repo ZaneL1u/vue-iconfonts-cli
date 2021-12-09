@@ -1,0 +1,8 @@
+{
+  "symbol_url": "https://at.alicdn.com/t/font_2999018_k9aho4tj5ug.js",
+  "use_typescript": true,
+  "save_dir": "./snapshots/demo-ts",
+  "trim_icon_prefix": "icon",
+  "unit": "rem",
+  "default_icon_size": 16
+}

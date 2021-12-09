@@ -1,0 +1,20 @@
+<template>
+  <component :is="name"></component>
+</template>
+<script>
+/* eslint-disable */
+#imports#
+export default {
+  name:"iconfont",
+  props:{
+    name:{
+      type: String,
+      default: ""
+    },
+  },
+  componetns:{
+    #cases#
+  },
+
+}
+</script>
