@@ -75,7 +75,7 @@ export const generateComponent = (data: XmlData, config: Config) => {
     iconFile = replaceNamesArray(iconFile, names);
   }
 
-  fs.writeFileSync(path.join(saveDir, 'index' + jsExtension), iconFile);
+  fs.writeFileSync(path.join(saveDir, 'Index.vue'), iconFile);
 
   console.log(`\n${colors.green('√')} All icons have putted into dir: ${colors.green(config.save_dir)}\n`);
 };
