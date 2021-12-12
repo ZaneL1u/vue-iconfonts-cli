@@ -12,8 +12,6 @@ import {
   replaceComponentName,
   replaceExports,
   replaceImports,
-  replaceNames,
-  replaceNamesArray,
   replaceSingleIconContent,
   replaceSize,
   replaceSizeUnit,
@@ -24,11 +22,10 @@ import { copyTemplate } from './copyTemplate';
 const ATTRIBUTE_FILL_MAP = ['path'];
 
 export const generateComponent = (data: XmlData, config: Config) => {
-  const names: string[] = [];
   const imports: string[] = [];
   const saveDir = path.resolve(config.save_dir);
   const jsExtension = '.js';
-  let cases: string = '';
+  let cases: string[] = [];
 
   mkdirp.sync(saveDir);
   glob.sync(path.join(saveDir, '*')).forEach((file) => fs.unlinkSync(file));
@@ -37,18 +34,15 @@ export const generateComponent = (data: XmlData, config: Config) => {
 
   data.svg.symbol.forEach((item) => {
     let singleFile: string;
-    const iconId = item.$.id;
-    const iconIdAfterTrim = config.trim_icon_prefix
-      ? iconId.replace(
-        new RegExp(`^${config.trim_icon_prefix}(.+?)$`),
-        (_, value) => value.replace(/^[-_.=+#@!~*]+(.+?)$/, '$1')
-      )
-      : iconId;
+    let iconId = item.$.id;
+
+    if (config.trim_icon_prefix) {
+      iconId = iconId.replace(new RegExp(`^${config.trim_icon_prefix}(.+?)$`), (_, value) => value.replace(/^[-_.=+#@!~*]+(.+?)$/, '$1'))
+    }
+
     const componentName = upperFirst(camelCase(iconId));
 
-    names.push(iconIdAfterTrim);
-
-    cases += `${componentName},`;
+    cases.push(componentName);
 
     imports.push(componentName);
 
@@ -65,15 +59,9 @@ export const generateComponent = (data: XmlData, config: Config) => {
 
   let iconFile = getTemplate('Icon' + jsExtension);
 
-  iconFile = replaceCases(iconFile, cases);
+  iconFile = replaceCases(iconFile, cases.join(",\n"));
   iconFile = replaceImports(iconFile, imports);
   iconFile = replaceExports(iconFile, imports);
-
-  if (!config.use_typescript) {
-    iconFile = replaceNames(iconFile, names);
-  } else {
-    iconFile = replaceNamesArray(iconFile, names);
-  }
 
   fs.writeFileSync(path.join(saveDir, 'Index.vue'), iconFile);
 

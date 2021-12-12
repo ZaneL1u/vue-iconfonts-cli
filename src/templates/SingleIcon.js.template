@@ -7,7 +7,7 @@ export default {
   props: {
     size: {
       type: Number,
-      default: 18,
+      default: #size#,
     },
     color: {
       type: String,
@@ -18,7 +18,8 @@ export default {
       default: "display: block;",
     },
   },
+  methods: {
+    getIconColor: getIconColor,
+  },
 };
 </script>
-
-<style></style>

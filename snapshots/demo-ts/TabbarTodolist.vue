@@ -18,7 +18,7 @@
 import { getIconColor } from "./helper";
 
 export default {
-  name: "IconTabbarTodolist",
+  name: "TabbarTodolist",
   props: {
     size: {
       type: Number,
@@ -33,7 +33,8 @@ export default {
       default: "display: block;",
     },
   },
+  methods: {
+    getIconColor: getIconColor,
+  },
 };
 </script>
-
-<style></style>

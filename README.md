@@ -1,7 +1,7 @@
-## react-iconfont-cli
-用纯JS把iconfont.cn的图标转换成React组件，不依赖字体，支持多色彩
+## vue-iconfonts-cli
+用纯JS把iconfont.cn的图标转换成Vue组件，不依赖字体，支持多色彩
 
-![](https://github.com/fwh1990/react-iconfont-cli/blob/master/images/icons.png?raw=true)
+![](https://github.com/Yorksh1re/vue-iconfont-cli/blob/master/images/icons.png?raw=true)
 
 ## 特性
 
@@ -9,16 +9,16 @@
 <br />
 2、支持渲染多色彩图标，支持自定义颜色
 <br />
-3、自动化生成图标组件，支持es6和typescript两种文件格式
+3、自动化生成图标组件
 
 ## Step 1
 安装插件
 ```bash
 # Yarn
-yarn add react-iconfont-cli --dev
+yarn add vue-iconfonts-cli --dev
 
 # Npm
-npm install react-iconfont-cli --save-dev
+npm install vue-iconfonts-cli --save-dev
 ```
 
 # Step 2
@@ -30,7 +30,6 @@ npx iconfont-init
 ```json
 {
     "symbol_url": "请参考README.md，复制官网提供的JS链接",
-    "use_typescript": false,
     "save_dir": "./src/components/iconfont",
     "trim_icon_prefix": "icon",
     "unit": "px",
@@ -43,12 +42,7 @@ npx iconfont-init
 
 <br />
 
-![](https://github.com/fwh1990/react-iconfont-cli/blob/master/images/symbol-url.png?raw=true)
-
-### use_typescript
-如果您的项目使用Typescript编写，请设置为true。这个选项将决定生成的图标组件是`.tsx`还是`.js`后缀。
-
-当该值为false时，我们会为您的图标生成`.js`和`.d.ts`两个文件，以便您能享受到最好的开发体验。
+![](https://github.com/Yorksh1re/vue-iconfont-cli/blob/master/images/symbol-url.png?raw=true)
 
 ### save_dir
 根据iconfont图标生成的组件存放的位置。每次生成组件之前，该文件夹都会被清空。
@@ -65,7 +59,7 @@ npx iconfont-init
 我们将为每个生成的图标组件加入默认的字体大小，当然，你也可以通过传入props的方式改变这个size值。
 
 # Step 3
-开始生成React标准组件
+开始生成Vue标准组件
 ```bash
 npx iconfont-h5
 ```
@@ -77,69 +71,62 @@ npx iconfont-h5
 现在我们提供了两种引入方式供您选择：
 
 1、使用汇总`Icon`组件：
-```typescript jsx
-import React from 'react';
-import IconFont from '../src/iconfont';
+```vue
+<template>
+	<icon-font name="{你的图标名称}"></icon-font>
+</template>
 
-export const App = () => {
-  return (
-    <div>
-      <IconFont name="alipay" size={20} />
-      <IconFont name="wechat" />
-    </div>
-  );
-};
+
+<script lang="ts" setup>
+import IconFont from "@/components/iconfont/Index.vue";
+</script>
 ```
 
 2、使用单个图标。这样可以避免没用到的图标也打包进App：
 
-```typescript jsx
-import React from 'react';
-import IconAlipay from '../src/iconfont/IconAlipay';
-import IconWechat from '../src/iconfont/IconWechat';
+```vue
+<template>
+	<icon-my size="18"></icon-my>
+</template>
 
-export const App = () => {
-  return (
-    <div>
-      <IconAlipay size={20} />
-      <IconWechat />
-    </div>
-  );
-};
+
+<script lang="ts" setup>
+import IconMy from "@/components/iconfont/IconMy.vue";
+</script>
 ```
 
 ### 图标尺寸
 根据配置`default_icon_size`，每个图标都会有一个默认的尺寸，你可以随时覆盖。
-```typescript jsx
-<IconFont name="alipay" size={20} />
+```vue
+<icon-font name="alipay" size="20"></icon-font>
 ```
-![](https://github.com/fwh1990/react-iconfont-cli/blob/master/images/default-color-icon.png?raw=true)
+![](https://github.com/Yorksh1re/vue-iconfont-cli/blob/master/images/default-color-icon.png?raw=true)
 ### 图标单色
 单色图标，如果不指定颜色值，图标将渲染原本的颜色。如果你想设置为其他的颜色，那么设置一个你想要的颜色即可。
 
 **注意：如果你在props传入的color是字符串而不是数组，那么即使原本是多色彩的图标，也会变成单色图标。**
 
-```typescript jsx
-<IconFont name="alipay" color="green" />
+```vue
+<icon-font name="alipay" color="green"></icon-font>
 ```
-![](https://github.com/fwh1990/react-iconfont-cli/blob/master/images/one-color-icon.png?raw=true)
+![](https://github.com/Yorksh1re/vue-iconfont-cli/blob/master/images/one-color-icon.png?raw=true)
 
 ### 图标多色彩
 多色彩的图标，如果不指定颜色值，图标将渲染原本的多色彩。如果你想设置为其他的颜色，那么设置一组你想要的颜色即可
-```typescript jsx
-<IconFont name="alipay" color={['green', 'orange']} />
+```vue
+<icon-font name="alipay" :color="['green', 'orange']"></icon-font>
 ```
 颜色组的数量以及排序，需要根据当前图标的信息来确定。您需要进入图标组件中查看并得出结论。
 
 
-![](https://github.com/fwh1990/react-iconfont-cli/blob/master/images/multi-color-icon.png?raw=true)
+![](https://github.com/Yorksh1re/vue-iconfont-cli/blob/master/images/multi-color-icon.png?raw=true)
 
 ### 与文字并排
 图标是块状的容器，如果您想与文字并排混合，请使用`flex`布局以保证文字和图标能对齐
-```jsx harmony
-<div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-  <span>Hello</span>
-  <IconFont name="alipay" />
+```vue
+<div style="display: flex, flex-direction: row, align-items: center">
+  	<span>Hello</span>
+    <icon-font name="alipay"></icon-font>
 </div>
 ```
 
@@ -151,13 +138,13 @@ npx iconfont-h5
 ```
 
 # 扩展
-|平台|库|
-|----|---|
-|小程序|[mini-program-iconfont-cli](https://github.com/iconfont-cli/mini-program-iconfont-cli)|
-|Taro|[taro-iconfont-cli](https://github.com/iconfont-cli/taro-iconfont-cli)|
-|React Native|[react-native-iconfont-cli](https://github.com/iconfont-cli/react-native-iconfont-cli)|
-|Flutter|[flutter-iconfont-cli](https://github.com/iconfont-cli/flutter-iconfont-cli)
-|Remax|[remax-iconfont-cli](https://github.com/iconfont-cli/remax-iconfont-cli)
+| 平台         | 库                                                                                     |
+| ------------ | -------------------------------------------------------------------------------------- |
+| 小程序       | [mini-program-iconfont-cli](https://github.com/iconfont-cli/mini-program-iconfont-cli) |
+| Taro         | [taro-iconfont-cli](https://github.com/iconfont-cli/taro-iconfont-cli)                 |
+| React Native | [react-native-iconfont-cli](https://github.com/iconfont-cli/react-native-iconfont-cli) |
+| Flutter      | [flutter-iconfont-cli](https://github.com/iconfont-cli/flutter-iconfont-cli)           |
+| Remax        | [remax-iconfont-cli](https://github.com/iconfont-cli/remax-iconfont-cli)               |
 
 
 --------

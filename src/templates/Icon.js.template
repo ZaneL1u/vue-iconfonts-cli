@@ -1,9 +1,10 @@
 <template>
-  <component :is="name"></component>
+  <component :is="name" :size="size" :color="color" :style="style"></component>
 </template>
 <script>
 /* eslint-disable */
 #imports#
+
 export default {
   name:"iconfont",
   props:{
@@ -11,10 +12,21 @@ export default {
       type: String,
       default: ""
     },
+    size:{
+      type: Number,
+      default: #size#,
+    },
+    color: {
+      type: String,
+      default: "",
+    },
+    style: {
+      type: String,
+      default: "display: block;",
+    },
   },
-  componetns:{
+  components:{
     #cases#
   },
-
 }
 </script>
