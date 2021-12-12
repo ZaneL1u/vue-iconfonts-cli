@@ -19,7 +19,7 @@ export default {
       default: #size#,
     },
     color: {
-      type: String,
+      type: Object,
       default: "",
     },
     style: {

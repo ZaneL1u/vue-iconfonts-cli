@@ -25,7 +25,7 @@ export default {
       default: 18,
     },
     color: {
-      type: String,
+      type: Object,
       default: "",
     },
     style: {
