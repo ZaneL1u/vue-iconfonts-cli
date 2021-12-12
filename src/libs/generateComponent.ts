@@ -59,10 +59,10 @@ export const generateComponent = (data: XmlData, config: Config) => {
 
   let iconFile = getTemplate('Icon' + jsExtension);
 
+  iconFile = replaceSize(iconFile, config.default_icon_size);
   iconFile = replaceCases(iconFile, cases.join(",\n"));
   iconFile = replaceImports(iconFile, imports);
   iconFile = replaceExports(iconFile, imports);
-  iconFile = replaceSize(iconFile, config.default_icon_size);
 
   fs.writeFileSync(path.join(saveDir, 'Index.vue'), iconFile);
 

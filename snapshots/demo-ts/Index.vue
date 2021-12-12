@@ -16,7 +16,7 @@ export default {
     },
     size:{
       type: Number,
-      default: #size#,
+      default: 18,
     },
     color: {
       type: Object,
