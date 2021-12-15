@@ -1,6 +1,9 @@
-<template>#iconContent#</template>
+<template>
+  <div :style="`background-image: url("${renderSVG()}")`"></div>
+</template>
 <script>
 import { getIconColor } from "./helper";
+import { svg2css } from "./svg2css";
 
 export default {
   name: "#componentName#",
@@ -19,7 +22,9 @@ export default {
     },
   },
   methods: {
-    getIconColor: getIconColor,
+    renderSVG:function(){
+      return svg2css(`#iconContent#`)
+    }
   },
 };
 </script>

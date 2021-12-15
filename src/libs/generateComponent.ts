@@ -31,6 +31,7 @@ export const generateComponent = (data: XmlData, config: Config) => {
   glob.sync(path.join(saveDir, '*')).forEach((file) => fs.unlinkSync(file));
 
   copyTemplate(`helper${jsExtension}`, path.join(saveDir, `helper${jsExtension}`));
+  copyTemplate(`svg2css${jsExtension}`, path.join(saveDir, `svg2css${jsExtension}`));
 
   data.svg.symbol.forEach((item) => {
     let singleFile: string;
@@ -70,7 +71,7 @@ export const generateComponent = (data: XmlData, config: Config) => {
 };
 
 const generateCase = (data: XmlData['svg']['symbol'][number], baseIdent: number) => {
-  let template = `\n${whitespace(baseIdent)}<svg viewBox="${data.$.viewBox}" :width="size" :height="size" :style="style">\n`;
+  let template = `\n${whitespace(baseIdent)}<svg viewBox="${data.$.viewBox}" width="\${this.size}" height="\${this.size}" style="\${this.style}">\n`;
 
   for (const domName of Object.keys(data)) {
     if (domName === '$') {
@@ -113,7 +114,7 @@ const addAttribute = (domName: string, sub: XmlData['svg']['symbol'][number]['pa
 
     for (const attributeName of Object.keys(sub.$)) {
       if (attributeName === 'fill') {
-        template += `\n${whitespace(counter.baseIdent + 4)}:${camelCase(attributeName)}="getIconColor(color, ${counter.colorIndex}, '${sub.$[attributeName]}')"`;
+        template += `\n${whitespace(counter.baseIdent + 4)}${camelCase(attributeName)}="\${getIconColor(color, ${counter.colorIndex}, '${sub.$[attributeName]}')}"`;
         counter.colorIndex += 1;
       } else {
         template += `\n${whitespace(counter.baseIdent + 4)}${camelCase(attributeName)}="${sub.$[attributeName]}"`;
