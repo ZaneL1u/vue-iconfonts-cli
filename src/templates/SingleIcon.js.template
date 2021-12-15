@@ -1,5 +1,5 @@
 <template>
-  <div :style="`background-image: url("${renderSVG()}")`"></div>
+  <div :style="renderSVG()"></div>
 </template>
 <script>
 import { getIconColor } from "./helper";
@@ -23,7 +23,8 @@ export default {
   },
   methods: {
     renderSVG:function(){
-      return svg2css(`#iconContent#`)
+      const res = svg2css(`#iconContent#`,this.color);
+      return `background-image: url("${res}");width:${this.size}px;height:${this.size}px;${this.style}`;
     }
   },
 };

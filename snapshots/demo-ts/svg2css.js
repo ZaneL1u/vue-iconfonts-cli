@@ -1,6 +1,3 @@
-"use strict";
-exports.__esModule = true;
-exports.svgTocss = void 0;
 function addfun(str, array) {
     if (str && array) {
         for (var i in array) {
@@ -96,7 +93,7 @@ function str2arr(str, mark) {
     return arr;
 }
 // svg转css（多色）
-function svgTocss(code, color) {
+function svg2css(code, color) {
     //去除无用信息 p-id
     code = code.replace(/p\-id\=\"[0-9]*\"/g, '');
     //清除格式
@@ -170,4 +167,6 @@ function svgTocss(code, color) {
     css += '%3E%3C/svg%3E';
     return css;
 }
-exports.svgTocss = svgTocss;
+export {
+    svg2css
+};
