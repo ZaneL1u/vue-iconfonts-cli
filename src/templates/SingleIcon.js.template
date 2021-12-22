@@ -13,7 +13,7 @@ export default {
       default: #size#,
     },
     color: {
-      type: String | Array,
+      type: [String, Array],
       default: "",
     },
     style: {

@@ -13,11 +13,11 @@ export default {
       default: ""
     },
     size:{
-      type: Number,
+      type: String,
       default: #size#,
     },
     color: {
-      type: Object,
+      type: [String, Array],
       default: "",
     },
     style: {
