@@ -9,11 +9,11 @@ export default {
   name: "#componentName#",
   props: {
     size: {
-      type: Number,
+      type: String,
       default: #size#,
     },
     color: {
-      type: Object,
+      type: String | Array,
       default: "",
     },
     style: {
