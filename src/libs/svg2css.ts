@@ -142,7 +142,7 @@ export function svgTocss(code: string, color?: string[]) {
 
         let fill;
         if (color && color[i]) {
-            fill = color;
+            fill = typeof color === 'string' ? color : color[i];
             fill = fill.replace('#', '%23');
         } else {
             reg = /fill\=\"(\#{0,1})([A-z0-9]*)?\"/;
