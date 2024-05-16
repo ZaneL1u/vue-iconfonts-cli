@@ -133,7 +133,7 @@ function svg2css(code, color) {
         var cpre = '%23';
         var fill = void 0;
         if (color && color[i]) {
-            fill = color;
+            fill = typeof color === 'string' ? color : color[i];
             fill = fill.replace('#', '%23');
         }
         else {
