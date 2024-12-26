@@ -17,7 +17,7 @@ export default {
       default: "",
     },
     style: {
-      type: String,
+      type: [String, Object],
       default: "display: block;",
     },
   },
