@@ -5,3 +5,4 @@ build/
 /iconfont.json
 .DS_Store
 .vscode
+package-lock.json
